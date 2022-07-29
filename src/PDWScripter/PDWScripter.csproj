@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>net60</TargetFrameworks>
     <Version>1.1.0</Version>
+    <Platforms>AnyCPU;ARM64;x64</Platforms>
   </PropertyGroup>
 
   <ItemGroup>

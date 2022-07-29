@@ -17,7 +17,9 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-     <Exec Command="if $(PlatformName) == x64 (&#xD;&#xA;  xcopy /S /Y &quot;$(OutDir)\*&quot; &quot;$(SolutionDir)\..\..\schema\bin&quot;&#xD;&#xA;)" />
+	  <Exec Command="echo $(PlatformName)" />
+      <Exec Command="if $(PlatformName) == x64 (xcopy /S /Y &quot;$(OutDir)\*&quot; &quot;$(SolutionDir)\..\..\schema\bin&quot;)" />
   </Target>
-	
+
+
 </Project>
