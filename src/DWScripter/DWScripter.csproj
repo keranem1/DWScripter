@@ -9,6 +9,7 @@
     <TargetFrameworks>net60</TargetFrameworks>
     <Version>1.1.0</Version>
     <Platforms>AnyCPU;ARM64;x64</Platforms>
+    <PostBuildEvent>echo $(PlatformName)</PostBuildEvent>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,10 +17,8 @@
     <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
   </ItemGroup>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-	  <Exec Command="echo $(PlatformName)" />
-      <Exec Command="if $(PlatformName) == x64 (xcopy /S /Y &quot;$(OutDir)\*&quot; &quot;$(SolutionDir)\..\..\schema\bin&quot;)" />
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(PlatformName)' == 'x64'" >
+    <Exec Command="xcopy /S /Y &quot;$(OutDir)\*&quot; &quot;$(SolutionDir)\..\..\schema\bin&quot;" />
   </Target>
-
-
+    
 </Project>
