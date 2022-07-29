@@ -29,7 +29,7 @@ namespace DWScripter
             string mode = "";
             string ExcludeObjectSuffixList = " "; //"_old|_new|_test|_dba";  // used to exclude test or non-user objects;
             string serverTarget = "";
-            string strportTarget = "";
+            //string strportTarget = "";
             string TargetDb = "";
             string userNameTarget = "";
             string pwdTarget = "";
@@ -193,7 +193,7 @@ namespace DWScripter
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
-                throw ex;
+                //throw ex;
             }
 
             if (c.conn != null)

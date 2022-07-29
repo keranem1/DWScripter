@@ -8,8 +8,7 @@
     <OutputType>Exe</OutputType>
     <TargetFrameworks>net60</TargetFrameworks>
     <Version>1.1.0</Version>
-    <Platforms>AnyCPU;ARM64;x64</Platforms>
-    <PostBuildEvent>echo $(PlatformName)</PostBuildEvent>
+    <Platforms>AnyCPU</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,8 +16,13 @@
     <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
   </ItemGroup>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(PlatformName)' == 'x64'" >
+  <Target Name="PreBuild" AfterTargets="PreBuildEvent" Condition="'$(RuntimeIdentifier)' != ''">
+    <Exec Command="echo $(RuntimeIdentifier)" />
+  </Target>
+
+  <!-- Only copy to schema/bin if no RID (-os parameter) -->
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(RuntimeIdentifier)' == ''">
     <Exec Command="xcopy /S /Y &quot;$(OutDir)\*&quot; &quot;$(SolutionDir)\..\..\schema\bin&quot;" />
   </Target>
-    
+
 </Project>
