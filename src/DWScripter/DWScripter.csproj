@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
     <ProjectReference Include="..\PDWScripter\PDWScripter.csproj" />
@@ -8,6 +8,7 @@
     <OutputType>Exe</OutputType>
     <TargetFrameworks>net60</TargetFrameworks>
     <Version>1.1.0</Version>
+    <Platforms>AnyCPU;ARM64;x64</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,7 +17,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-     <Exec Command="xcopy /S /Y &quot;$(OutDir)\*&quot; &quot;$(SolutionDir)\..\..\schema\bin&quot;" />
+     <Exec Command="if $(PlatformName) == x64 (&#xD;&#xA;  xcopy /S /Y &quot;$(OutDir)\*&quot; &quot;$(SolutionDir)\..\..\schema\bin&quot;&#xD;&#xA;)" />
   </Target>
 	
 </Project>
